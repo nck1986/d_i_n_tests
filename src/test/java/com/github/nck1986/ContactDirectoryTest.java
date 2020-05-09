@@ -9,6 +9,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -22,13 +23,32 @@ public class ContactDirectoryTest {
     @Autowired
     RestTemplate restTemplate;
 
+    private final String BASE_URL = "http://some_domain.com";
+    private final String PATH = "/company/%d/users?name=%s";
+
     @Test
-    public void ok() {
+    public void companyValidUserValid() {
         mockRestServiceServer.expect(requestTo("/company/777/users?name=Izergil"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess("+71111111111", TEXT_PLAIN));
         String request = restTemplate.getForObject("/company/777/users?name=Izergil", String.class);
         assertEquals("+71111111111", request);
         mockRestServiceServer.verify();
+    }
+
+    @Test public void companyNotValidUserNotValid(){
+
+    }
+
+    @Test public void companyValidUserNotFromThisCompany(){
+
+    }
+
+    @Test public void companyValidUserNotExist(){
+
+    }
+
+    @Test public void companyValidUserHaveNoPermissions(){
+
     }
 }
