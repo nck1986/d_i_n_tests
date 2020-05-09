@@ -52,9 +52,8 @@ public class ContactDirectoryTest {
      */
     @Test
     public void companyIdNotExistUserValid() {
-        String companyId = "777", someName = "Ezekiel";
+        String companyId = "777", someName = "Izergil";
         String url = stringURL(companyId, someName);
-        String body = "+71111111111";
 
         mockRestServiceServer.expect(requestTo(url))
                 .andExpect(method(GET))
