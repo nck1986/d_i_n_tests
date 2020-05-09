@@ -27,7 +27,7 @@ public class ContactDirectoryTest {
     private final String PATH = "/company/%d/users?name=%s";
 
     @Test
-    public void companyValidUserValid() {
+    public void companyIdValidUserValid() {
         mockRestServiceServer.expect(requestTo("/company/777/users?name=Izergil"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess("+71111111111", TEXT_PLAIN));
@@ -36,19 +36,48 @@ public class ContactDirectoryTest {
         mockRestServiceServer.verify();
     }
 
-    @Test public void companyNotValidUserNotValid(){
+    @Test public void companyIdNotExistUserValid(){
 
     }
 
-    @Test public void companyValidUserNotFromThisCompany(){
+    @Test public void companyIdNotValidUserValid(){
 
     }
 
-    @Test public void companyValidUserNotExist(){
+    @Test public void companyIdHaveNoContacts(){
 
     }
 
-    @Test public void companyValidUserHaveNoPermissions(){
+    @Test public void companyIdValidUserNotValid(){
+
+    }
+
+    @Test public void companyIdValidUserNotFromThisCompany(){
+
+    }
+
+    @Test public void companyIdValidUserNotExist(){
+
+    }
+
+    /**
+     * User valid and exist but have no permissions to read contacts data
+     */
+    @Test public void companyIdValidUserHaveNoPermissions(){
+
+    }
+
+    /**
+     * User Name is too long (more then 100 symbols)
+     */
+    @Test public void companyIdValidUserNameTooLong(){
+
+    }
+
+    /**
+     * Server response time is above 3000 ms
+     */
+    @Test public void serverResponseTooLong(){
 
     }
 }
